@@ -1,3 +1,3 @@
-# Intron_Number
-An R script to determine the number of introns per transcript.
-The script is a bit messy, you have been warned...
+# Introns
+An R scripts to determine the number of introns per transcript, the length of introns per transcript, etc.
+
