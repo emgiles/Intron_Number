@@ -50,6 +50,7 @@ read in gtf file with pkg GenomicFeatures
 ```columns(S.scurra.p)```
 
 create a table of gene and transcript IDs
+
 ```txdf <- AnnotationDbi::select(S.scurra.p,keys=keys(S.scurra.p, "GENEID"),columns=c("GENEID", "TXID", "TXCHROM","TXNAME","EXONID", "EXONNAME"),keytype="GENEID")```
 
 ```head(txdf, 20)```
@@ -109,6 +110,7 @@ create vector with species names
 ```merged.ss.final <- cbind(merged.ss.final, spID)```
 
 ## Repeat for species 1 to x 
+
 create merged.speciesID.final dataframes for each species
 
 ## Merge dataframes
@@ -141,20 +143,6 @@ Add column with Orthologous chromosomes distinction based on MCSCAN collinearity
 ```pairwise.wilcox.test(merged_df$num_introns, merged_df$spID, p.adjust.method = "fdr")```
 
 ## PLOT 
-ggplot(merged_df) +
-  aes(x = spID, y = num_introns, color= spID) +
-  geom_jitter(show.legend = FALSE) +
-  scale_color_manual(values=c("#FB61D7", "#A58AFF", "#00B6EB"))+
-  stat_summary(fun.data=mean_sdl, 
-               geom="pointrange", color="black", pch=16, size=.7) +
-  stat_summary(fun.y=median, geom="point", size=3, color="black", pch=17) +
-  scale_x_discrete(name=" ") +
-  scale_y_continuous(name="Number of Introns/Transcript") + 
-  theme(legend.title=element_blank(),
-        axis.text.x=element_blank(),
-        axis.text.y=element_text(size=10),
-        panel.background=element_blank(),
-        axis.line=element_line(colour="black"),
-        axis.text=element_text(size=10),
-        axis.title=element_text(size=10))
+
+```ggplot(merged_df) + aes(x = spID, y = num_introns, color= spID) + geom_jitter(show.legend = FALSE) + scale_color_manual(values=c("#FB61D7", "#A58AFF","#00B6EB")) + stat_summary(fun.data=mean_sdl, geom="pointrange", color="black", pch=16, size=.7) + stat_summary(fun.y=median, geom="point", size=3, color="black", pch=17) + scale_x_discrete(name=" ") + scale_y_continuous(name="Number of Introns/Transcript") + theme(legend.title=element_blank(), axis.text.x=element_blank(), axis.text.y=element_text(size=10),panel.background=element_blank(),axis.line=element_line(colour="black"), axis.text=element_text(size=10),axis.title=element_text(size=10))```
 
